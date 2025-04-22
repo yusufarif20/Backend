@@ -1,5 +1,6 @@
 from flask import Flask, request, jsonify
 import openai  # atau logika chatbot buatan sendiri
+import os
 
 app = Flask(__name__)
 
@@ -20,7 +21,5 @@ def chat():
     return jsonify({"reply": chatbot_reply})
 
 if __name__ == "__main__":
-    import os
-
     port = int(os.environ.get("PORT", 5000))
     app.run(host="0.0.0.0", port=port)
