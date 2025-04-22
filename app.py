@@ -1,10 +1,9 @@
 from flask import Flask, request, jsonify
-import openai 
+import openai
+import os
 
 app = Flask(__name__)
-
-# Konfigurasi API Key jika pakai OpenAI
-openai.api_key = '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'
+openai.api_key = os.getenv("OPENAI_API_KEY")
 
 @app.route("/chat", methods=["POST"])
 def chat():
@@ -15,5 +14,7 @@ def chat():
         messages=[{"role": "user", "content": user_message}]
     )
     chatbot_reply = response['choices'][0]['message']['content']
-    
     return jsonify({"reply": chatbot_reply})
+
+if __name__ == "__main__":
+    app.run(host="0.0.0.0", port=8000)
