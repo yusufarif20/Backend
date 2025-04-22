@@ -17,3 +17,7 @@ def chat():
     )
     chatbot_reply = response['choices'][0]['message']['content']
     return jsonify({"reply": chatbot_reply})
+
+if __name__ == "__main__":
+    port = int(os.environ.get("PORT", 5000)) 
+    app.run(host="0.0.0.0", port=port)
