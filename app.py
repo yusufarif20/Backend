@@ -1,17 +1,15 @@
 from flask import Flask, request, jsonify
-import openai  # atau logika chatbot buatan sendiri
-import os
+import openai 
 
 app = Flask(__name__)
 
 # Konfigurasi API Key jika pakai OpenAI
-openai.api_key = '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'
+openai.api_key = 'sk-...'
 
 @app.route("/chat", methods=["POST"])
 def chat():
     user_message = request.json['message']
     
-    # Jika pakai OpenAI
     response = openai.ChatCompletion.create(
         model="gpt-3.5-turbo",
         messages=[{"role": "user", "content": user_message}]
@@ -19,7 +17,3 @@ def chat():
     chatbot_reply = response['choices'][0]['message']['content']
     
     return jsonify({"reply": chatbot_reply})
-
-if __name__ == "__main__":
-    port = int(os.environ.get("PORT", 5000))
-    app.run(host="0.0.0.0", port=port)
