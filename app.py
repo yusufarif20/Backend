@@ -17,6 +17,3 @@ def chat():
     )
     chatbot_reply = response['choices'][0]['message']['content']
     return jsonify({"reply": chatbot_reply})
-
-if __name__ == "__main__":
-    app.run(host="0.0.0.0", port=8000)
