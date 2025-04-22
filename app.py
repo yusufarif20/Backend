@@ -5,10 +5,12 @@ import os
 app = Flask(__name__)
 openai.api_key = os.getenv("OPENAI_API_KEY")
 
-@app.route("/chat", methods=["POST"])
+@app.route("/chat", methods=["GET", "POST"])
 def chat():
-    user_message = request.json['message']
+    if request.method == "GET":
+        return "Chat endpoint is working! Use POST to send a message."
     
+    user_message = request.json['message']
     response = openai.ChatCompletion.create(
         model="gpt-3.5-turbo",
         messages=[{"role": "user", "content": user_message}]
