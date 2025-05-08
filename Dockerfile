@@ -9,4 +9,5 @@ COPY . .
 
 ENV PYTHONUNBUFFERED=1
 
-CMD sh -c "gunicorn --bind 0.0.0.0:${PORT} app:app"
+ENV PORT=5000
+CMD sh -c "gunicorn --bind 0.0.0.0:$PORT app:app"
